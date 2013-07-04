@@ -28,7 +28,8 @@
                         if($.isFunction( settings.onUpdate ))
                             settings.onUpdate.call()
                     },
-                    type: 'post'
+                    type: 'put',
+                    dataType: 'json'
                 }
             );
 

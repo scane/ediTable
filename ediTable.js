@@ -12,21 +12,27 @@
                 var $input = $('<input>').attr({name: settings.attributes[index], type: 'text', value: $(col).html() });
                 $(col).html($input);
             })
-            $row.find('.ediTable-save').attr('disabled',false)
-            $(this).attr('disabled',true)
+            $row.find('.ediTable-save').attr('disabled',false);
+            $(this).attr('disabled',true);
         });
 
         $('.ediTable-save').on('click',function(){
-            var $row = $(this).parents('tr');
+            var save_button = $(this);
+            var $row = save_button.parents('tr');
             $.ajax(
                 {
                     url: $row.data('update-url'),
                     data: $row.find('input[type="text"]').serialize(),
-                    success: function() {
+                    success: function(response) {
+                        var $cols = $row.find('td[class!="action"]');
+                        $.each($cols,function(index,col){
+                            var input = $(col).find('input');
+                            input.replaceWith(input.val())
+                        })
                         $row.find('.ediTable-edit').attr('disabled',false);
-                        $(this).attr('disabled',true)
+                        save_button.attr('disabled',true);
                         if($.isFunction( settings.onUpdate ))
-                            settings.onUpdate.call()
+                            settings.onUpdate(response);
                     },
                     type: 'put',
                     dataType: 'json'

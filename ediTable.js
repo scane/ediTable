@@ -52,9 +52,10 @@
         $('.ediTable-save').on('click',function(){
             var save_button = $(this);
             var $row = save_button.parents('tr');
+            var update_url = $(this).data('update-url');
             $.ajax(
                 {
-                    url: $row.data('update-url'),
+                    url: update_url,
                     data: $row.find('input,select').serialize(),
                     success: function(response) {
                         var $cols = $row.find('td[class!="action"]');
@@ -87,6 +88,19 @@
                     dataType: 'json'
                 }
             );
+
+        });
+
+        $(".ediTable-destroy").on('click', function(){
+            var $row = $(this).parents('tr');
+            $.ajax({
+                url: $(this).data('destroy-url'),
+                type: 'delete',
+                dataType: 'json',
+                success: function(response) {
+                    $row.fadeOut(1000,function(){ $(this).remove(); });
+                }
+            });
 
         })
 

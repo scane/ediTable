@@ -2,7 +2,8 @@
     $.fn.ediTable = function(options) {
         var settings = $.extend({
             fields: null,
-            onUpdate: null
+            onUpdate: null,
+            onDestroy: null
         },options);
 
         $('.ediTable-edit').on('click',function(){
@@ -99,18 +100,15 @@
                 dataType: 'json',
                 success: function(response) {
                     $row.fadeOut(1000,function(){ $(this).remove(); });
+                    if($.isFunction( settings.onDestroy ))
+                        settings.onDestroy(response);
                 }
             });
 
         })
 
         return this.each(function(){
-            var $rows = $(this).find('tbody tr');
-            $.each($rows, function(index,row){
-                var id = $(row).data('id')
-                $(row).find('.ediTable-edit, .ediTable-save').attr('data-id',id);
-                $('.ediTable-save').attr('disabled',true)
-            })
+            $(this).find('.ediTable-save').attr('disabled',true)
         })
     }
 })(jQuery);

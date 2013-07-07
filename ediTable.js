@@ -15,6 +15,9 @@
                 var $input = null;
                 if('type' in field)
                     switch(field.type){
+                        case 'text':
+                            $input = $('<input>').attr({type: 'text' , value: value });
+                            break;
 
                         case 'checkbox':
                             $input = $('<input>').attr({type: 'checkbox', value: true, checked: field.labels[0] == value ? true : false});
@@ -29,6 +32,14 @@
                                 $input.append($option);
                             });
                             $input.find('option').filter(function(){ return $(this).html() == value }).attr('selected', true);
+                            break;
+
+                        case 'date':
+                            var date_format = 'dateFormat' in field ? field.dateFormat : 'dd/mm/yy';
+                            $input = $('<input>').attr({ type: 'text', value: value }).datepicker({
+                                dateFormat: date_format,
+                                defaultDate: $.datepicker.parseDate(date_format, value)
+                            });
                     }
                 else
                     $input = $('<input>').attr({type: 'text' , value: value });

@@ -4,6 +4,13 @@ ediTable
 This javascript library adds basic RUD(Read, Update and delete) to your HTML tables. As of now it supports checkbox, select, text and date type.
 ![alt tag](https://raw.github.com/scane/ediTable/master/docs/demo-image.png)
 
+Dependencies
+============
+Jquery http://jquery.com/
+
+Jquery-ui http://jqueryui.com
+
+
 Example
 
     <table class="ediTable">

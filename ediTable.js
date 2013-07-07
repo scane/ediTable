@@ -8,7 +8,7 @@
 
         $('.ediTable-edit').on('click',function(){
             var $row = $(this).parents('tr');
-            var $cols = $row.find('td[class!="action"]');
+            var $cols = $row.find('td[class!="ediTable-exclude"]');
             $.each($cols,function(index,col){
                 var value = $(col).html();
                 $(col).html('');
@@ -59,7 +59,7 @@
                     url: update_url,
                     data: $row.find('input,select').serialize(),
                     success: function(response) {
-                        var $cols = $row.find('td[class!="action"]');
+                        var $cols = $row.find('td[class!="ediTable-exclude"]');
                         $.each($cols,function(index,col){
                             var input = $(col).find('input[type!="hidden"],select');
                             var value = '';

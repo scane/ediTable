@@ -70,9 +70,10 @@ Basic Usage
 If no type is specified for a field, its taken as of type text. Date type suppots all the options which are provided by jquery-ui date-picker http://jqueryui.com/datepicker/
 
 Callbacks
+=========
 This library expects a json response.
 
-onUpdate: function(response) { .. }
-onDestroy: function(response) { .. }
+    onUpdate: function(response) { .. }
+    onDestroy: function(response) { .. }
 
  

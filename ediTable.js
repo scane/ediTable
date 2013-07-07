@@ -35,11 +35,10 @@
                             break;
 
                         case 'date':
-                            var date_format = 'dateFormat' in field ? field.dateFormat : 'dd/mm/yy';
-                            $input = $('<input>').attr({ type: 'text', value: value }).datepicker({
-                                dateFormat: date_format,
-                                defaultDate: $.datepicker.parseDate(date_format, value)
-                            });
+                            var date_format = 'dateFormat' in field.options ? field.options.dateFormat : "mm/dd/yy";
+                            $input = $('<input>').attr({ type: 'text', value: value }).datepicker(field.options);
+                            $input.defaultDate = $.datepicker.parseDate(date_format, value)
+
                     }
                 else
                     $input = $('<input>').attr({type: 'text' , value: value });
